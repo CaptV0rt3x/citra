@@ -161,6 +161,12 @@ struct Values {
     std::string announce_multiplayer_room_endpoint_url;
     std::string citra_username;
     std::string citra_token;
+
+    // Discord rpc
+#ifdef USE_DISCORD_PRESENCE
+    bool enable_discord_presence;
+#endif
+
 } extern values;
 
 // a special value for Values::region_value indicating that citra will automatically select a region

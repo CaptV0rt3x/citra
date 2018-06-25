@@ -9,6 +9,9 @@
 #include "core/hle/service/hid/hid.h"
 #include "core/hle/service/ir/ir.h"
 #include "core/settings.h"
+#ifdef USE_DISCORD_PRESENCE
+#include "citra_qt/discord.h"
+#endif
 #include "video_core/video_core.h"
 
 namespace Settings {
@@ -35,6 +38,10 @@ void Apply() {
         Core::DSP().SetSink(values.sink_id);
         Core::DSP().EnableStretching(values.enable_audio_stretching);
     }
+
+#ifdef USE_DISCORD_PRESENCE
+    DiscordRPC::SetDiscordPresenceEnabled(values.enable_discord_presence);
+#endif
 
     Service::HID::ReloadInputDevices();
     Service::IR::ReloadInputDevices();

@@ -10,6 +10,7 @@
 #include <QMetaType>
 #include <QString>
 #include <QStringList>
+#include "core/core.h"
 
 namespace UISettings {
 
@@ -55,6 +56,10 @@ struct Values {
     bool updater_found;
     bool update_on_close;
     bool check_for_update_on_start;
+
+#ifdef USE_DISCORD_PRESENCE
+    bool enable_discord_presence;
+#endif
 
     QString roms_path;
     QString symbols_path;

@@ -184,6 +184,13 @@ void Config::ReadValues() {
     Settings::values.citra_token = qt_config->value("citra_token").toString().toStdString();
     qt_config->endGroup();
 
+#ifdef USE_DISCORD_PRESENCE
+    qt_config->beginGroup("Discord");
+    Settings::values.enable_discord_presence =
+        qt_config->value("enable_discord_presence", true).toBool();
+    qt_config->endGroup();
+#endif
+
     qt_config->beginGroup("UI");
     UISettings::values.theme = qt_config->value("theme", UISettings::themes[0].second).toString();
 
@@ -395,6 +402,12 @@ void Config::SaveValues() {
     qt_config->setValue("citra_username", QString::fromStdString(Settings::values.citra_username));
     qt_config->setValue("citra_token", QString::fromStdString(Settings::values.citra_token));
     qt_config->endGroup();
+
+#ifdef USE_DISCORD_PRESENCE
+    qt_config->beginGroup("Discord");
+    qt_config->setValue("enable_discord_presence", Settings::values.enable_discord_presence);
+    qt_config->endGroup();
+#endif
 
     qt_config->beginGroup("UI");
     qt_config->setValue("theme", UISettings::values.theme);

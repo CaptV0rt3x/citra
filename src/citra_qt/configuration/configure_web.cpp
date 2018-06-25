@@ -5,6 +5,9 @@
 #include <QIcon>
 #include <QMessageBox>
 #include "citra_qt/configuration/configure_web.h"
+#ifdef USE_DISCORD_PRESENCE
+#include "citra_qt/discord.h"
+#endif
 #include "core/settings.h"
 #include "core/telemetry_session.h"
 #include "ui_configure_web.h"
@@ -49,10 +52,17 @@ void ConfigureWeb::setConfiguration() {
     ui->label_telemetry_id->setText(
         tr("Telemetry ID: 0x%1").arg(QString::number(Core::GetTelemetryId(), 16).toUpper()));
     user_verified = true;
+
+#ifdef USE_DISCORD_PRESENCE
+    ui->toggle_discordrpc->setChecked(Settings::values.enable_discord_presence);
+#endif
 }
 
 void ConfigureWeb::applyConfiguration() {
     Settings::values.enable_telemetry = ui->toggle_telemetry->isChecked();
+#ifdef USE_DISCORD_PRESENCE
+    Settings::values.enable_discord_presence = ui->toggle_discordrpc->isChecked();
+#endif
     if (user_verified) {
         Settings::values.citra_username = ui->edit_username->text().toStdString();
         Settings::values.citra_token = ui->edit_token->text().toStdString();
