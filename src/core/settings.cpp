@@ -39,10 +39,6 @@ void Apply() {
         Core::DSP().EnableStretching(values.enable_audio_stretching);
     }
 
-#ifdef USE_DISCORD_PRESENCE
-    DiscordRPC::SetDiscordPresenceEnabled(values.enable_discord_presence);
-#endif
-
     Service::HID::ReloadInputDevices();
     Service::IR::ReloadInputDevices();
     Service::CAM::ReloadCameraDevices();
