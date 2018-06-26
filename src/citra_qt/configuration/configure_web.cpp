@@ -8,6 +8,7 @@
 #ifdef USE_DISCORD_PRESENCE
 #include "citra_qt/discord.h"
 #endif
+#include "core/core.h"
 #include "core/settings.h"
 #include "core/telemetry_session.h"
 #include "ui_configure_web.h"
@@ -19,6 +20,8 @@ ConfigureWeb::ConfigureWeb(QWidget* parent)
             &ConfigureWeb::RefreshTelemetryID);
     connect(ui->button_verify_login, &QPushButton::clicked, this, &ConfigureWeb::VerifyLogin);
     connect(this, &ConfigureWeb::LoginVerified, this, &ConfigureWeb::OnLoginVerified);
+
+    ui->toggle_discordrpc->setEnabled(!Core::System::GetInstance().IsPoweredOn());
 
     this->setConfiguration();
 }
