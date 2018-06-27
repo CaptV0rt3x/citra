@@ -260,6 +260,9 @@ endif()
 if (CITRA_ENABLE_COMPATIBILITY_REPORTING)
     add_definitions(-DCITRA_ENABLE_COMPATIBILITY_REPORTING)
 endif()
+if (USE_DISCORD_PRESENCE)
+    add_definitions(-DUSE_DISCORD_PRESENCE)
+endif()
 
 # Platform-specific library requirements
 # ======================================

@@ -8,6 +8,7 @@
 #ifdef USE_DISCORD_PRESENCE
 #include "citra_qt/discord.h"
 #endif
+#include "citra_qt/ui_settings.h"
 #include "core/core.h"
 #include "core/settings.h"
 #include "core/telemetry_session.h"
@@ -57,14 +58,14 @@ void ConfigureWeb::setConfiguration() {
     user_verified = true;
 
 #ifdef USE_DISCORD_PRESENCE
-    ui->toggle_discordrpc->setChecked(Settings::values.enable_discord_presence);
+    ui->toggle_discordrpc->setChecked(UISettings::values.enable_discord_presence);
 #endif
 }
 
 void ConfigureWeb::applyConfiguration() {
     Settings::values.enable_telemetry = ui->toggle_telemetry->isChecked();
 #ifdef USE_DISCORD_PRESENCE
-    Settings::values.enable_discord_presence = ui->toggle_discordrpc->isChecked();
+    UISettings::values.enable_discord_presence = ui->toggle_discordrpc->isChecked();
 #endif
     if (user_verified) {
         Settings::values.citra_username = ui->edit_username->text().toStdString();

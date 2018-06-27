@@ -6,7 +6,6 @@
 #include "citra_qt/ui_settings.h"
 #include "common/common_types.h"
 #include "core/core.h"
-#include "core/settings.h"
 
 #ifdef USE_DISCORD_PRESENCE
 #include <ctime>
@@ -18,7 +17,7 @@ namespace DiscordRPC {
 s64 StartTime;
 
 void Init() {
-    if (!Settings::values.enable_discord_presence)
+    if (!UISettings::values.enable_discord_presence)
         return;
 
     StartTime = time(NULL);
@@ -30,21 +29,21 @@ void Init() {
 }
 
 void Shutdown() {
-    if (!Settings::values.enable_discord_presence)
+    if (!UISettings::values.enable_discord_presence)
         return;
     Discord_ClearPresence();
     Discord_Shutdown();
 }
 
 void Update() {
-    if (Settings::values.enable_discord_presence) {
+    if (UISettings::values.enable_discord_presence) {
         std::string title;
         Core::System::GetInstance().GetAppLoader().ReadTitle(title);
         DiscordRichPresence presence = {};
         presence.largeImageKey = "citra_logo";
         presence.largeImageText = "Citra is an emulator for the Nintendo 3DS";
         presence.state = title.empty() ? "Not in-game" : title.c_str();
-        presence.details = "Playing Game :";
+        presence.details = "Playing Game:";
         presence.startTimestamp = StartTime;
         Discord_UpdatePresence(&presence);
     } else {

@@ -9,9 +9,6 @@
 #include "core/hle/service/hid/hid.h"
 #include "core/hle/service/ir/ir.h"
 #include "core/settings.h"
-#ifdef USE_DISCORD_PRESENCE
-#include "citra_qt/discord.h"
-#endif
 #include "video_core/video_core.h"
 
 namespace Settings {

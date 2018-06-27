@@ -8,6 +8,5 @@ namespace DiscordRPC {
 void Init();
 void Shutdown();
 void Update();
-// void SetDiscordPresenceEnabled(bool enabled);
 
 } // namespace DiscordRPC

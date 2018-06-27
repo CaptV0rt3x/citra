@@ -57,6 +57,7 @@ struct Values {
     bool update_on_close;
     bool check_for_update_on_start;
 
+    // Discord RPC
 #ifdef USE_DISCORD_PRESENCE
     bool enable_discord_presence;
 #endif
