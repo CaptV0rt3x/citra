@@ -32,6 +32,9 @@
 #include "citra_qt/debugger/profiler.h"
 #include "citra_qt/debugger/registers.h"
 #include "citra_qt/debugger/wait_tree.h"
+#ifdef USE_DISCORD_PRESENCE
+#include "citra_qt/discord.h"
+#endif
 #include "citra_qt/game_list.h"
 #include "citra_qt/hotkeys.h"
 #include "citra_qt/main.h"
@@ -121,6 +124,10 @@ GMainWindow::GMainWindow() : config(new Config()), emu_thread(nullptr) {
 
     default_theme_paths = QIcon::themeSearchPaths();
     UpdateUITheme();
+
+#ifdef USE_DISCORD_PRESENCE
+    DiscordRPC::Init();
+#endif
 
     Network::Init();
 
@@ -712,9 +719,16 @@ void GMainWindow::BootGame(const QString& filename) {
         ShowFullscreen();
     }
     OnStartGame();
+
+#ifdef USE_DISCORD_PRESENCE
+    DiscordRPC::Update();
+#endif
 }
 
 void GMainWindow::ShutdownGame() {
+#ifdef USE_DISCORD_PRESENCE
+    DiscordRPC::Shutdown();
+#endif
     emu_thread->RequestStop();
 
     // Release emu threads from any breakpoints

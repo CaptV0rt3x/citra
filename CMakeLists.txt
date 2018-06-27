@@ -20,6 +20,8 @@ option(ENABLE_WEB_SERVICE "Enable web services (telemetry, etc.)" ON)
 
 option(ENABLE_CUBEB "Enables the cubeb audio backend" ON)
 
+option(USE_DISCORD_PRESENCE "Enables Discord Rich Presence, shows the current game on Discord" ON)
+
 if(NOT EXISTS ${CMAKE_SOURCE_DIR}/.git/hooks/pre-commit)
     message(STATUS "Copying pre-commit hook")
     file(COPY hooks/pre-commit
@@ -257,6 +259,9 @@ if (ENABLE_WEB_SERVICE)
 endif()
 if (CITRA_ENABLE_COMPATIBILITY_REPORTING)
     add_definitions(-DCITRA_ENABLE_COMPATIBILITY_REPORTING)
+endif()
+if (USE_DISCORD_PRESENCE)
+    add_definitions(-DUSE_DISCORD_PRESENCE)
 endif()
 
 # Platform-specific library requirements

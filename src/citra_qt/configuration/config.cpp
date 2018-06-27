@@ -186,6 +186,10 @@ void Config::ReadValues() {
 
     qt_config->beginGroup("UI");
     UISettings::values.theme = qt_config->value("theme", UISettings::themes[0].second).toString();
+#ifdef USE_DISCORD_PRESENCE
+    UISettings::values.enable_discord_presence =
+        qt_config->value("enable_discord_presence", true).toBool();
+#endif
 
     qt_config->beginGroup("Updater");
     UISettings::values.check_for_update_on_start =
@@ -398,6 +402,9 @@ void Config::SaveValues() {
 
     qt_config->beginGroup("UI");
     qt_config->setValue("theme", UISettings::values.theme);
+#ifdef USE_DISCORD_PRESENCE
+    qt_config->setValue("enable_discord_presence", UISettings::values.enable_discord_presence);
+#endif
 
     qt_config->beginGroup("Updater");
     qt_config->setValue("check_for_update_on_start", UISettings::values.check_for_update_on_start);
