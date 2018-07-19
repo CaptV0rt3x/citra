@@ -9,6 +9,7 @@ COMPRESSION_FLAGS="-czvf"
 mkdir "$REV_NAME"
 
 cp build/src/citra/citra "$REV_NAME"
+cp build/src/citra_cmd/citra-cmd "$REV_NAME"
 cp -r build/src/citra_qt/citra-qt.app "$REV_NAME"
 cp build/src/dedicated_room/citra-room "$REV_NAME"
 
