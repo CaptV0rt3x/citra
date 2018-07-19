@@ -23,8 +23,8 @@
 #include <shellapi.h>
 #endif
 
-#include "citra/config.h"
-#include "citra/emu_window/emu_window_sdl2.h"
+#include "citra_cmd/config.h"
+#include "citra_cmd/emu_window/emu_window_sdl2.h"
 #include "common/common_paths.h"
 #include "common/file_util.h"
 #include "common/logging/backend.h"
